@@ -1,2 +1,4 @@
 # updater
- h3aj Ubuntu upgrade script
+ h3aj Universal Debian upgrade script
+ 
+ Updates OS, docker-compose images, NVR, ...
