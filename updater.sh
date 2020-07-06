@@ -93,6 +93,9 @@ updateUpdater() {
 
     cd /scripts
     sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+	echo
+	echo Retrieved latest version of updater script, will be executed on next run.
+	echo
 }
 
 pruneDocker() {
