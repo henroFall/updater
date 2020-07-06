@@ -45,5 +45,7 @@ check_exit_status
 echo 
 echo
 echo Done. Run by typing:
+echo
 echo updater
 echo
+echo AFTER YOU REBOOT
