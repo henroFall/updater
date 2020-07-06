@@ -3,5 +3,4 @@
  
  Updates OS, docker-compose images, NVR, ...
  
- `mkdir ~/scripts && sudo mkdir /scripts && cd /scripts && sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh && sudo chmod +x updater.sh
- && ln -s /scripts/updater.sh ~scripts/updater`
+ `wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater-install.sh && sudo chmod +x updater-install.sh && ./updater-install.sh && rm updater-install.sh `
