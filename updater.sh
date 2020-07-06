@@ -85,7 +85,7 @@ updateDocker() {
           check_exit_status $1
       done
 	else
-	  echo -e "\e[93mThere are no docker files at $dockerHome -\e[0m"
+	  echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
 	fi
 }
 
@@ -105,7 +105,7 @@ pruneDocker() {
     sudo docker system prune -f
     check_exit_status $1
 	else
-	echo -e "\e[93mThere are no docker files at $dockerHome -\e[0m"
+	echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
 	fi
 }
 
@@ -118,8 +118,6 @@ showDocker() {
     echo
     docker ps
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
-	else
-	echo -e "\e[93mThere are no docker files at $dockerHome -\e[0m"
 	fi
 }
 
