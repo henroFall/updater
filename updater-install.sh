@@ -28,6 +28,7 @@ cleanup() {
 }
 
 #######################################################
+
 rootCheck
 
 echo Installing Updater script.
