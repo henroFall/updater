@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rootCheck() {
+
     if [ $(id -u) = 0 ]; 
     then
         echo -e "\e[41m I am root! Run this WITHOUT SUDO, this script has SUDO where needed. \e[0m"
@@ -61,10 +62,10 @@ updateOS() {
 }
 
 updateDocker() {
-    echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
-    dockerHome=~/docker
-    composeFile=docker-compose.yml
-	if [ -d "$dockerHome" ]; then
+
+    if [ -d "$dockerHome" ]; then
+	  echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
+      composeFile=docker-compose.yml
       cd $dockerHome
       check_exit_status $1
       shopt -s nullglob
@@ -88,28 +89,48 @@ updateDocker() {
 	fi
 }
 
+updateUpdater() {
+
+    cd /scripts
+    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+}
+
 pruneDocker() {
+
+    if [ -d "$dockerHome" ]; then
     echo -e "\e[93mCleaning up Docker fragments...\e[0m"
     sudo docker system prune -f
     check_exit_status $1
+	else
+	echo -e "\e[93mThere are no docker files at $dockerHome -\e[0m"
+	fi
 }
 
 showDocker() {
-    echo -e "\e[93m--------------------------------------------------------------"
+
+    if [ -d "$dockerHome" ]; then
+	echo -e "\e[93m--------------------------------------------------------------"
     echo -e "\e[93mHello again, $USER. Here are the running containers.."
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
     echo
     docker ps
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
+	else
+	echo -e "\e[93mThere are no docker files at $dockerHome -\e[0m"
+	fi
 }
 
 leave() {
+
     echo -e "\e[93mUpdate Complete\e[0m"
     exit
 }
+########################################################################
 
+dockerHome=~/docker
 greeting $@
 rootCheck $@
+updateUpdater $@
 updateOS $@
 updateDocker $@
 pruneDocker $@
