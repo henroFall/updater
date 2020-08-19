@@ -38,13 +38,16 @@ sudo mkdir /scripts
 check_exit_status
 cd /scripts
 sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updaterandreboot.sh
 sudo chmod +x updater.sh
+sudo chmod +x updaterandreboot.sh
 cd ~/bin
 ln -s /scripts/updater.sh updater
 check_exit_status
 echo 
 echo
-echo Done. Run by typing:
+echo Done. Schedule updateandreboot.sh in crontab.
+echo Run on demand by typing:
 echo
 echo updater
 echo

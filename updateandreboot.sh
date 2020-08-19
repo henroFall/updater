@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Set home directory to Docker here: 
-
-dockerHome=/home/nuc/docker
-
 rootCheck() {
 
     if [ $(id -u) = 0 ]; 
@@ -98,8 +94,6 @@ updateUpdater() {
     cd /scripts
     sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
 	sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
-    sudo chmod +x updater.sh
-    sudo chmod +x updaterandreboot.sh
 	echo
 	echo Retrieved latest version of updater script, will be executed on next run.
 	echo
@@ -135,6 +129,7 @@ leave() {
 }
 ########################################################################
 
+dockerHome=~/docker
 greeting $@
 rootCheck $@
 updateUpdater $@
