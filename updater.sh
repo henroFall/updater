@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Set home directory to Docker here: 
-
 dockerHome=/home/nuc/docker
 
 rootCheck() {
