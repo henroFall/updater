@@ -129,7 +129,6 @@ leave() {
 }
 ########################################################################
 
-dockerHome=~/docker
 greeting $@
 rootCheck $@
 updateUpdater $@
@@ -139,3 +138,4 @@ pruneDocker $@
 showDocker $@
 leave $@
 rebootCheck $@
+sudo reboot
