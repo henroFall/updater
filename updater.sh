@@ -98,7 +98,7 @@ updateUpdater() {
     sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
 	sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo chmod +x updater.sh
-    sudo chmod +x updaterandreboot.sh
+    sudo chmod +x updateandreboot.sh
 	echo
 	echo Retrieved latest version of updater script, will be executed on next run.
 	echo
