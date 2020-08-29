@@ -131,7 +131,7 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     echo "Updater last run:" > ~/updater.log
-    date >> ~/updater.log    
+    date >> /home/nuc/updater.log    
     exit
 }
 ########################################################################
