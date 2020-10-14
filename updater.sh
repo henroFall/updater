@@ -2,6 +2,7 @@
 
 # Set home directory to Docker here: 
 dockerHome=/home/nuc/docker
+nvrHome=/not/yet/used
 
 rootCheck() {
 
@@ -134,6 +135,26 @@ leave() {
     date >> ~/updater.log    
     exit
 }
+
+isNVRHere() {
+if [ -d "$nvrHome" ]; then
+   echo .
+fi
+}
+
+updateNVR() {
+   mkdir -p /tmp/ipconfigureDownload
+   cd /tmp/ipconfigureDownload
+   rm -f -v /tmp/ipconfigureDownload/*
+   wget -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
+   mv ./* ./ipconfigure-latest.deb
+   check_exit_status
+   dpkg -i ipconfigure-latest.deb
+   check_exit_status
+   apt --fix-broken install
+   check_exit_status
+}
+
 ########################################################################
 
 greeting $@
@@ -144,4 +165,6 @@ updateDocker $@
 pruneDocker $@
 showDocker $@
 leave $@
+# isNVRHere $@
+# updateNVR $@
 rebootCheck $@
