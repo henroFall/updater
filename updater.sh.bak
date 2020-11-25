@@ -5,11 +5,11 @@ dockerHome=/home/nuc/docker
 nvrHome=/not/yet/used
 
 rootCheck() {
-    if [ -z "$1" ]; then
-      if [ $(id -u) = 0 ]; then
-          echo -e "\e[41m I am root! Run this WITHOUT SUDO, this script has SUDO where needed. \e[0m"
-          exit 1
-      fi
+
+    if [ $(id -u) = 0 ]; 
+    then
+        echo -e "\e[41m I am root! Run this WITHOUT SUDO, this script has SUDO where needed. \e[0m"
+        exit 1
     fi
 }
 
@@ -133,11 +133,7 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     echo "Updater last run:" > ~/updater.log
-    if [ -z "$1" ]; then
-        date >> ~/updater.log
-        else 
-          date >> /home/nuc/updater.log
-    fi
+    date >> ~/updater.log    
     exit
 }
 

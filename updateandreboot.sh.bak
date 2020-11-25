@@ -2,14 +2,13 @@
 
 # Set home directory to Docker here: 
 dockerHome=/home/nuc/docker
-nvrHome=/not/yet/used
 
 rootCheck() {
-    if [ -z "$1" ]; then
-      if [ $(id -u) = 0 ]; then
-          echo -e "\e[41m I am root! Run this WITHOUT SUDO, this script has SUDO where needed. \e[0m"
-          exit 1
-      fi
+
+    if [ $(id -u) = 0 ]; 
+    then
+        echo -e "\e[41m I am root! Run this WITHOUT SUDO, this script has SUDO where needed. \e[0m"
+        exit 1
     fi
 }
 
@@ -60,9 +59,8 @@ updateOS() {
     echo -e "\e[93mQuietly updating package information...\e[0m "
     sudo apt update -qq;
     check_exit_status $1
+
     sudo apt -y upgrade;
-    check_exit_status $1
-	sudo apt -y autoremove;
     check_exit_status $1
 }
 
@@ -133,33 +131,9 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     echo "Updater last run:" > ~/updater.log
-    if [ -z "$1" ]; then
-        date >> ~/updater.log
-        else 
-          date >> /home/nuc/updater.log
-    fi
+    date >> /home/nuc/updater.log    
     exit
 }
-
-isNVRHere() {
-if [ -d "$nvrHome" ]; then
-   echo
-fi
-}
-
-updateNVR() {
-   mkdir -p /tmp/ipconfigureDownload
-   cd /tmp/ipconfigureDownload
-   rm -f -v /tmp/ipconfigureDownload/*
-   wget -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
-   mv ./* ./ipconfigure-latest.deb
-   check_exit_status
-   dpkg -i ipconfigure-latest.deb
-   check_exit_status
-   apt --fix-broken install
-   check_exit_status
-}
-
 ########################################################################
 
 greeting $@
@@ -170,6 +144,5 @@ updateDocker $@
 pruneDocker $@
 showDocker $@
 leave $@
-# isNVRHere $@
-# updateNVR $@
 rebootCheck $@
+sudo reboot
