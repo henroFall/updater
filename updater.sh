@@ -3,6 +3,7 @@
 # Set home directory to Docker here: 
 dockerHome=/home/nuc/docker
 nvrHome=/not/yet/used
+scriptsHome=/scripts
 
 rootCheck() {
     if [ -z "$1" ]; then
@@ -96,7 +97,7 @@ updateDocker() {
 
 updateUpdater() {
 
-    cd /scripts
+    cd "$scriptsHome"
     sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
 	sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo chmod +x updater.sh
@@ -129,17 +130,10 @@ showDocker() {
 	fi
 }
 
-leave() {
-
-    echo -e "\e[93mUpdate Complete\e[0m"
-    echo "Updater last run:" > ~/updater.log
-    if [ -z "$1" ]; then
-        date >> ~/updater.log
-        else 
-          date >> /home/nuc/updater.log
-    fi
-    exit
+getScripts() {
+    # Need to change things to use git and pull down the whole /scripts folder, and push it back
 }
+	  
 
 isNVRHere() {
 if [ -d "$nvrHome" ]; then
@@ -158,6 +152,18 @@ updateNVR() {
    check_exit_status
    apt --fix-broken install
    check_exit_status
+}
+
+leave() {
+
+    echo -e "\e[93mUpdate Complete\e[0m"
+    echo "Updater last run:" > ~/updater.log
+    if [ -z "$1" ]; then
+        date >> ~/updater.log
+        else 
+          date >> /home/nuc/updater.log
+    fi
+    exit
 }
 
 ########################################################################
