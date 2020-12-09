@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set home directory to Docker here: 
+# Set home directory to Docker here:
 dockerHome=/home/nuc/docker
 nvrHome=/not/yet/used
 scriptsHome=/scripts
@@ -63,14 +63,14 @@ updateOS() {
     check_exit_status $1
     sudo apt -y upgrade;
     check_exit_status $1
-	sudo apt -y autoremove;
+    sudo apt -y autoremove;
     check_exit_status $1
 }
 
 updateDocker() {
 
     if [ -d "$dockerHome" ]; then
-	  echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
+      echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       cd $dockerHome
       check_exit_status $1
@@ -90,21 +90,21 @@ updateDocker() {
           cd /home/nuc/docker
           check_exit_status $1
       done
-	else
-	  echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
-	fi
+    else
+      echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
+    fi
 }
 
 updateUpdater() {
 
     cd "$scriptsHome"
     sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
-	sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo chmod +x updater.sh
     sudo chmod +x updateandreboot.sh
-	echo
-	echo Retrieved latest version of updater script, will be executed on next run.
-	echo
+    echo
+    echo Retrieved latest version of updater script, will be executed on next run.
+    echo
 }
 
 pruneDocker() {
@@ -113,27 +113,27 @@ pruneDocker() {
     echo -e "\e[93mCleaning up Docker fragments...\e[0m"
     sudo docker system prune -f
     check_exit_status $1
-	else
-	echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
-	fi
+    else
+    echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
+    fi
 }
 
 showDocker() {
 
     if [ -d "$dockerHome" ]; then
-	echo -e "\e[93m--------------------------------------------------------------"
+    echo -e "\e[93m--------------------------------------------------------------"
     echo -e "\e[93mHello again, $USER. Here are the running containers.."
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
     echo
     docker ps
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
-	fi
+    fi
 }
 
 getScripts() {
+     echo -e "\e[93mUpdloading any new scripts..\e[0m"
     # Need to change things to use git and pull down the whole /scripts folder, and push it back
 }
-	  
 
 isNVRHere() {
 if [ -d "$nvrHome" ]; then
@@ -160,7 +160,7 @@ leave() {
     echo "Updater last run:" > ~/updater.log
     if [ -z "$1" ]; then
         date >> ~/updater.log
-        else 
+        else
           date >> /home/nuc/updater.log
     fi
     exit
