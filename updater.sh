@@ -79,13 +79,12 @@ updateDocker() {
           cd $dname
         if test -f "$composeFile"; then
           echo -e "\e[93mOperating on $dname -\e[0m"
-          check_exit_status $1
-          sudo docker-compose down
-          check_exit_status $1
           sudo docker-compose pull
           check_exit_status $1
-          sudo docker-compose up -d
+          sudo docker-compose up -d --remove-orphans
           check_exit_status $1
+		  docker image prune
+		  check_exit_status $1
         fi
           cd /home/nuc/docker
           check_exit_status $1
@@ -111,7 +110,7 @@ pruneDocker() {
 
     if [ -d "$dockerHome" ]; then
     echo -e "\e[93mCleaning up Docker fragments...\e[0m"
-    sudo docker system prune -f
+    sudo docker system prune --volumes --force
     check_exit_status $1
     else
     echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
