@@ -83,7 +83,7 @@ updateDocker() {
           check_exit_status $1
           sudo docker-compose up -d --remove-orphans
           check_exit_status $1
-		  docker image prune
+		  docker image prune -f
 		  check_exit_status $1
         fi
           cd /home/nuc/docker
