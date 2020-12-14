@@ -81,7 +81,7 @@ updateDocker() {
           echo -e "\e[93mOperating on $dname -\e[0m"
           sudo docker-compose pull
           check_exit_status $1
-          sudo docker-compose up -d --remove-orphans
+          sudo docker-compose up -d -f --remove-orphans
           check_exit_status $1
 		  docker image prune -f
 		  check_exit_status $1
