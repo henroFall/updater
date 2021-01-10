@@ -97,8 +97,8 @@ updateDocker() {
 updateUpdater() {
 
     cd "$scriptsHome"
-    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
-    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+    sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+    sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo chmod +x updater.sh
     sudo chmod +x updateandreboot.sh
     echo
@@ -144,7 +144,7 @@ updateNVR() {
    mkdir -p /tmp/ipconfigureDownload
    cd /tmp/ipconfigureDownload
    rm -f -v /tmp/ipconfigureDownload/*
-   wget -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
+   wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
    mv ./* ./ipconfigure-latest.deb
    check_exit_status
    dpkg -i ipconfigure-latest.deb
