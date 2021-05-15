@@ -56,6 +56,27 @@ greeting() {
     echo
 }
 
+killVPN() {
+
+Service="nordvpnd"
+var=$(service --status-all | grep -w "$Service")
+if [ "output" != "" ]; then
+    nordvpn d
+else
+    echo "NordVPN not installed, not acting to stop VPN."
+fi
+}
+
+startVPN() {
+
+Service="nordvpnd"
+var=$(service --status-all | grep -w "$Service")
+if [ "output" != "" ]; then
+    nordvpn c
+else
+    echo "NordVPN not installed, not acting to connect VPN."
+fi
+
 updateOS() {
 
     echo -e "\e[93mQuietly updating package information...\e[0m "
@@ -169,6 +190,7 @@ leave() {
 
 greeting $@
 rootCheck $@
+killVPN $@
 updateUpdater $@
 updateOS $@
 updateDocker $@
@@ -177,4 +199,5 @@ showDocker $@
 leave $@
 # isNVRHere $@
 # updateNVR $@
+startVPN $@
 rebootCheck $@
