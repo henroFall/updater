@@ -61,7 +61,6 @@ killVPN() {
 Service="nordvpnd"
 var=$(service --status-all | grep -w "$Service")
 if [ "output" != "" ]; then
-    echo "Stopping NordVPN... You will see a Whoops! error if NordVPN is already stopped."
     nordvpn d
 else
     echo "NordVPN not installed, not acting to stop VPN."
@@ -172,7 +171,7 @@ updateNVR() {
    check_exit_status
    dpkg -i ipconfigure-latest.deb
    check_exit_status
-   apt --fix-broken install
+   sudo apt --fix-broken install
    check_exit_status
 }
 
@@ -198,8 +197,9 @@ updateOS $@
 updateDocker $@
 pruneDocker $@
 showDocker $@
+startVPN $@
+rebootCheck $@
 leave $@
 # isNVRHere $@
 # updateNVR $@
-startVPN $@
-rebootCheck $@
+
