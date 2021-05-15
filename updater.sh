@@ -76,6 +76,7 @@ if [ "output" != "" ]; then
 else
     echo "NordVPN not installed, not acting to connect VPN."
 fi
+}
 
 updateOS() {
 
