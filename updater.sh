@@ -131,7 +131,7 @@ pruneDocker() {
 
     if [ -d "$dockerHome" ]; then
     echo -e "\e[93mCleaning up Docker fragments...\e[0m"
-    sudo docker system prune --volumes --force
+    docker system prune -a --volumes --force
     check_exit_status $1
     else
     echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
