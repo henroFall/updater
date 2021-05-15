@@ -153,7 +153,7 @@ showDocker() {
 
 getScripts() {
      echo -e "\e[93mUpdloading any new scripts..\e[0m"
-    # Need to change things to use git and pull down the whole /scripts folder, and push it back
+    # Idea is for a routine to let me edit scripts locally to tweak, then push back to github
 }
 
 isNVRHere() {
@@ -163,6 +163,7 @@ fi
 }
 
 updateNVR() {
+   # Need to fix SUDO / not SUDO here 
    mkdir -p /tmp/ipconfigureDownload
    cd /tmp/ipconfigureDownload
    rm -f -v /tmp/ipconfigureDownload/*
@@ -171,7 +172,7 @@ updateNVR() {
    check_exit_status
    dpkg -i ipconfigure-latest.deb
    check_exit_status
-   sudo apt --fix-broken install
+   apt --fix-broken install
    check_exit_status
 }
 
@@ -200,7 +201,6 @@ showDocker $@
 startVPN $@
 rebootCheck $@
 leave $@
-
 # isNVRHere $@
 # updateNVR $@
 
