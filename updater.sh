@@ -58,24 +58,24 @@ greeting() {
 
 killVPN() {
 
-Service="nordvpnd"
-var=$(service --status-all | grep -w "$Service")
-if [ "output" != "" ]; then
+#Service="nordvpnd"
+#var=$(service --status-all | grep -w "$Service")
+#if [ "output" != "" ]; then
     nordvpn d
-else
-    echo "NordVPN not installed, not acting to stop VPN."
-fi
+#else
+#    echo "NordVPN not installed, not acting to stop VPN."
+#fi
 }
 
 startVPN() {
 
-Service="nordvpnd"
-var=$(service --status-all | grep -w "$Service")
-if [ "output" != "" ]; then
+#Service="nordvpnd"
+#var=$(service --status-all | grep -w "$Service")
+#if [ "output" != "" ]; then
     nordvpn c
-else
-    echo "NordVPN not installed, not acting to connect VPN."
-fi
+#else
+#    echo "NordVPN not installed, not acting to connect VPN."
+#fi
 }
 
 updateOS() {
