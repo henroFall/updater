@@ -14,14 +14,6 @@ rootCheck() {
     fi
 }
 
-rebootCheck() {
-
-    if [ -f /var/run/reboot-required ]; then
-      cat /var/run/reboot-required
-    else echo -e '\e[93mNo reboot is required.\e[0m'
-    fi
-}
-
 check_exit_status() {
 
     if [ $? -eq 0 ]
@@ -174,6 +166,15 @@ updateNVR() {
    check_exit_status
    apt --fix-broken install
    check_exit_status
+}
+
+rebootCheck() {
+
+    #if [ -f /var/run/reboot-required ]; then
+    #  cat /var/run/reboot-required
+    #else echo -e '\e[93mNo reboot is required.\e[0m'
+    #fi
+	needrestart -r i
 }
 
 leave() {
