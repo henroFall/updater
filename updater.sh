@@ -50,6 +50,7 @@ greeting() {
 
 killVPN() {
 
+#if [ -x /usr/bin/nordvpn ]; then
 if [ -x /home/nuc/scripts/norddown.sh ]; then
     /home/nuc/scripts/norddown.sh
 fi
@@ -65,6 +66,7 @@ fi
 
 startVPN() {
 
+#if [ -x /usr/bin/nordvpn ]; then
 if [ -x /home/nuc/scripts/nordup.sh ]; then
     /home/nuc/scripts/nordup.sh
 fi
