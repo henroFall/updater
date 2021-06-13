@@ -39,8 +39,12 @@ check_exit_status
 cd /scripts
 sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
 sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
+sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
 sudo chmod +x updater.sh
 sudo chmod +x updateandreboot.sh
+sudo chmod +x nordup.sh
+sudo chmod +x norddown.sh
 cd ~/bin
 ln -s /scripts/updater.sh updater
 check_exit_status
