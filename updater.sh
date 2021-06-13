@@ -49,9 +49,11 @@ greeting() {
 }
 
 killVPN() {
+
 if [ -x /home/nuc/scripts/norddown.sh ]; then
     /home/nuc/scripts/norddown.sh
 fi
+
 #Service="nordvpnd"
 #var=$(service --status-all | grep -w "$Service")
 #if [ "output" != "" ]; then
@@ -62,9 +64,11 @@ fi
 }
 
 startVPN() {
+
 if [ -x /home/nuc/scripts/nordup.sh ]; then
     /home/nuc/scripts/nordup.sh
 fi
+
 #Service="nordvpnd"
 #var=$(service --status-all | grep -w "$Service")
 #if [ "output" != "" ]; then
