@@ -49,22 +49,26 @@ greeting() {
 }
 
 killVPN() {
-
+if [ -x /home/nuc/scripts/norddown.sh ]; then
+    /home/nuc/scripts/norddown.sh
+fi
 #Service="nordvpnd"
 #var=$(service --status-all | grep -w "$Service")
 #if [ "output" != "" ]; then
-    nordvpn d
+#    nordvpn d
 #else
 #    echo "NordVPN not installed, not acting to stop VPN."
 #fi
 }
 
 startVPN() {
-
+if [ -x /home/nuc/scripts/nordup.sh ]; then
+    /home/nuc/scripts/nordup.sh
+fi
 #Service="nordvpnd"
 #var=$(service --status-all | grep -w "$Service")
 #if [ "output" != "" ]; then
-    nordvpn c
+#    nordvpn c
 #else
 #    echo "NordVPN not installed, not acting to connect VPN."
 #fi
