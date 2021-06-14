@@ -107,8 +107,8 @@ updateDocker() {
           check_exit_status $1
           sudo docker-compose up -d --force-recreate --remove-orphans
           check_exit_status $1
-		  docker image prune -f
-		  check_exit_status $1
+          docker image prune -f
+          check_exit_status $1
         fi
           cd /home/nuc/docker
           check_exit_status $1
@@ -123,8 +123,12 @@ updateUpdater() {
     cd "$scriptsHome"
     sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
     sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
+    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
     sudo chmod +x updater.sh
     sudo chmod +x updateandreboot.sh
+    sudo chmod +x nordup.sh
+    sudo chmod +x norddown.sh
     echo
     echo Retrieved latest version of updater script, will be executed on next run.
     echo
@@ -184,7 +188,7 @@ rebootCheck() {
     #  cat /var/run/reboot-required
     #else echo -e '\e[93mNo reboot is required.\e[0m'
     #fi
-	needrestart -r i
+    needrestart -r i
 }
 
 leave() {
