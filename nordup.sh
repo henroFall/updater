@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -x /usr/bin/nordvpn ]; then
-    nordvon c
-    nordvpn killswitch enable
+    nordvpn c
+    nordvpn set killswitch enable
     if [ -d /home/nuc/docker/transmission/ ]; then
         cd /home/nuc/docker/transmission
         docker-compose up --no-recreate --detach

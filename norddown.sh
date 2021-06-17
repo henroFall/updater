@@ -6,6 +6,6 @@ if [ -x /usr/bin/nordvpn ]; then
         cd /home/nuc/docker/jackett
         docker-compose down
     fi
-nordvpn killswitch disable
-nordvon d
+nordvpn set killswitch disable
+nordvpn d
 fi
