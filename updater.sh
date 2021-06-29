@@ -137,8 +137,8 @@ updateUpdater() {
 pruneDocker() {
 
     if [ -d "$dockerHome" ]; then
-    echo -e "\e[93mCleaning up Docker fragments...\e[0m"
-    docker system prune -a --volumes --force
+    echo -e "\e[93mCleaning up Docker fragments... NO LONGER PRUNING VOLUMES OR NON-DANGLING IMAGES \e[0m"
+    docker system prune #-a --volumes --force
     check_exit_status $1
     else
     echo -e "\e[93mThere are no docker files at $dockerHome to prune.\e[0m"
