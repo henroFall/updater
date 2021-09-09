@@ -213,7 +213,7 @@ updateOS $@
 updateDocker $@
 pruneDocker $@
 showDocker $@
-startVPN $@
+# startVPN $@
 rebootCheck $@
 leave $@
 # isNVRHere $@
