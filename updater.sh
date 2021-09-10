@@ -207,7 +207,7 @@ leave() {
 
 greeting $@
 rootCheck $@
-killVPN $@
+# killVPN $@
 updateUpdater $@
 updateOS $@
 updateDocker $@
