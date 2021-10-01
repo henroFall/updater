@@ -25,7 +25,7 @@ check_exit_status() {
       echo
       echo -e "\e[93mERROR Process Failed!\e[0m"
       echo
-      if [[ $1 == '-a' ]]
+      if [[ $1 == '-auto' ]]
       then
         echo -e "\e[41m AUTO MODE IS ENABLED, EXITING.. \e[0m"
         echo
