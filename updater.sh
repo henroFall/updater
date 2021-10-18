@@ -1,9 +1,27 @@
 #!/bin/bash
 
 # Set home directory to Docker here:
+homehome=/home/nuc
 dockerHome=/home/nuc/docker
 nvrHome=/not/yet/used
 scriptsHome=/scripts
+
+function whereami {
+        echo "Searching for location."
+        if [[ -d "/opt/amt/IoTGateway" ]]
+         then
+         whereami="/opt/amt/IoTGateway"
+        fi
+        if [[ -d "/usr/local/bin/IoTGateway" ]]
+         then
+         whereami="/usr/local/bin/IoTGateway"
+        fi
+        if [ -z "$whereami" ]
+                then
+                echo "NOT here. Exiting."
+                exit 1
+        fi
+}
 
 rootCheck() {
     if [ -z "$1" ]; then
@@ -194,11 +212,12 @@ rebootCheck() {
 leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
-    echo "Updater last run:" > ~/updater.log
     if [ -z "$1" ]; then
-        date >> ~/updater.log
+        echo "Updater last run:" > $homehome/updater.log
+        date >> $homehome/updater.log
         else
-          date >> /home/nuc/updater.log
+          echo "Updater last run:" > $dockerHome/updater.log
+          date >> $dockerHome/updater.log
     fi
     exit
 }
@@ -218,4 +237,3 @@ rebootCheck $@
 leave $@
 # isNVRHere $@
 # updateNVR $@
-
