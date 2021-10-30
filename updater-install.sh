@@ -50,8 +50,8 @@ ln -s /scripts/updater.sh updater
 check_exit_status
 echo 
 echo
-sudo apt update
-sudo apt install needrestart
+sudo apt -y update
+sudo apt -y install needrestart
 echo Done. Schedule updateandreboot.sh in crontab.
 echo Run on demand by typing:
 echo
