@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Set home directory to Docker here-
-homehome=$HOME
-dockerHome=$HOME/docker
-nvrHome=/not/yet/used
+# Set home directories here-
 scriptsHome=/scripts
+homeHome=$(cat $scriptsHome/home.txt)
+dockerHome=$homeHome/docker
+kiosk1=192.168.200.177
+
+nvrHome=/not/yet/used
+
 
 function whereami {
         echo "Searching for location."
@@ -69,8 +72,8 @@ greeting() {
 killVPN() {
 
 #if [ -x /usr/bin/nordvpn ]; then
-if [ -x /home/nuc/scripts/norddown.sh ]; then
-    /home/nuc/scripts/norddown.sh
+if [ -x $scriptsHome/norddown.sh ]; then
+    $scriptsHome/norddown.sh
 fi
 
 #Service="nordvpnd"
@@ -85,8 +88,8 @@ fi
 startVPN() {
 
 #if [ -x /usr/bin/nordvpn ]; then
-if [ -x /home/nuc/scripts/nordup.sh ]; then
-    /home/nuc/scripts/nordup.sh
+if [ -x $scriptsHome/nordup.sh ]; then
+    $scriptsHome/nordup.sh
 fi
 
 #Service="nordvpnd"
@@ -128,9 +131,11 @@ updateDocker() {
           docker image prune -f
           check_exit_status $1
         fi
-          cd /home/nuc/docker
+          cd $homeHome/docker
           check_exit_status $1
       done
+	  echo -e "\e[93mRestarting Kiosk...-\e[0m"
+	  sshpass -p Abc123! ssh pi@$kiosk1 'sudo reboot'
     else
       echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
     fi
@@ -139,17 +144,22 @@ updateDocker() {
 updateUpdater() {
 
     cd "$scriptsHome"
-    sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
-    sudo wget -nv -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
-    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
-    sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
+    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
+    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
     sudo chmod +x updater.sh
     sudo chmod +x updateandreboot.sh
     sudo chmod +x nordup.sh
     sudo chmod +x norddown.sh
     echo
-    echo Retrieved latest version of updater script, will be executed on next run.
-    echo
+	if [[ $1 == '-updateonly' ]]
+      then
+	  echo Option updateonly enabled.
+	  exit
+	fi
+	echo Retrieved latest version of updater script, will be executed on next run.
+	echo
 }
 
 pruneDocker() {
@@ -213,11 +223,11 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     if [ -z "$1" ]; then
-        touch $homehome/updater.log
-        echo "Updater last run:" > $homehome/updater.log
-        date >> $homehome/updater.log
+        touch $homeHome/updater.log
+        echo "Updater last run:" > $homeHome/updater.log
+        date >> $homeHome/updater.log
         else
-          touch $homehome/updater.log
+          touch $homeHome/updater.log
           echo "Updater last run:" > $dockerHome/updater.log
           date >> $dockerHome/updater.log
     fi

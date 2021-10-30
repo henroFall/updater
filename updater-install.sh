@@ -37,10 +37,13 @@ check_exit_status
 sudo mkdir /scripts
 check_exit_status
 cd /scripts
-sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
-sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
-sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
-sudo wget -N https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
+sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
+sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
+echo $HOME > ~/home.txt
+homeHome=$HOME
+sudo mv $homeHome/home.txt /scripts/home.txt
 sudo chmod +x updater.sh
 sudo chmod +x updateandreboot.sh
 sudo chmod +x nordup.sh
@@ -51,7 +54,7 @@ check_exit_status
 echo 
 echo
 sudo apt -y update
-sudo apt -y install needrestart
+sudo apt -y install needrestart sshpass
 echo Done. Schedule updateandreboot.sh in crontab.
 echo Run on demand by typing:
 echo
