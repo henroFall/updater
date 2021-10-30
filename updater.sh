@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set home directory to Docker here:
+# Set home directory to Docker here-
 homehome=/home/nuc
 dockerHome=/home/nuc/docker
 nvrHome=/not/yet/used
