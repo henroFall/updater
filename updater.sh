@@ -2,7 +2,7 @@
 
 # Set home directory to Docker here-
 homehome=$HOME
-dockerHome=/home/nuc/docker
+dockerHome=$HOME/docker
 nvrHome=/not/yet/used
 scriptsHome=/scripts
 
