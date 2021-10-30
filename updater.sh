@@ -213,9 +213,11 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     if [ -z "$1" ]; then
+        touch $homehome/updater.log
         echo "Updater last run:" > $homehome/updater.log
         date >> $homehome/updater.log
         else
+          touch $homehome/updater.log
           echo "Updater last run:" > $dockerHome/updater.log
           date >> $dockerHome/updater.log
     fi
