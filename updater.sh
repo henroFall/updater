@@ -135,7 +135,7 @@ updateDocker() {
           check_exit_status $1
       done
 	  echo -e "\e[93mRestarting Kiosk...-\e[0m"
-	  sshpass -p Abc123! ssh pi@$kiosk1 'sudo reboot'
+	  sshpass -p Abc123! ssh pi@$kiosk1 'sudo shutdown -r +5'
     else
       echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
     fi
