@@ -6,7 +6,7 @@ homeHome=$(cat $scriptsHome/home.txt)
 dockerHome=$homeHome/docker
 kiosk1=192.168.200.177
 
-nvrHome=/not/yet/used
+nvrHome=/opt/orchid
 
 
 function whereami {
@@ -186,7 +186,7 @@ showDocker() {
 }
 
 getScripts() {
-     echo -e "\e[93mUpdloading any new scripts..\e[0m"
+    echo -e "\e[93mUpdloading any new scripts..\e[0m"
     # Idea is for a routine to let me edit scripts locally to tweak, then push back to github
 }
 
@@ -198,16 +198,18 @@ fi
 
 updateNVR() {
    # Need to fix SUDO / not SUDO here 
-   mkdir -p /tmp/ipconfigureDownload
-   cd /tmp/ipconfigureDownload
-   rm -f -v /tmp/ipconfigureDownload/*
-   wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
-   mv ./* ./ipconfigure-latest.deb
-   check_exit_status
-   dpkg -i ipconfigure-latest.deb
-   check_exit_status
-   apt --fix-broken install
-   check_exit_status
+   if [ -d "$nvrHome" ]; then
+     mkdir -p /tmp/ipconfigureDownload
+     cd /tmp/ipconfigureDownload
+     rm -f -v /tmp/ipconfigureDownload/*
+     wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
+     mv ./* ./ipconfigure-latest.deb
+     check_exit_status
+     dpkg -i ipconfigure-latest.deb
+     check_exit_status
+     apt --fix-broken install
+     check_exit_status
+   fi
 }
 
 rebootCheck() {
@@ -248,4 +250,4 @@ showDocker $@
 rebootCheck $@
 leave $@
 # isNVRHere $@
-# updateNVR $@
+updateNVR $@
