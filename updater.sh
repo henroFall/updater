@@ -144,15 +144,7 @@ updateDocker() {
 updateUpdater() {
 
     cd "$scriptsHome"
-	rm *.sh.1
-	rm *.sh.2
-	rm *.sh.3
-	rm *.sh.4
-	rm *.sh.5
-	rm *.sh.6
-	rm *.sh.7
-	rm *.sh.8
-	rm *.sh.9
+	sudo rm *.sh.*
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
