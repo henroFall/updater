@@ -144,7 +144,6 @@ updateDocker() {
 updateUpdater() {
 
     cd "$scriptsHome"
-	sudo rm *.sh.*
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
     sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
@@ -153,6 +152,7 @@ updateUpdater() {
     sudo chmod +x updateandreboot.sh
     sudo chmod +x nordup.sh
     sudo chmod +x norddown.sh
+    sudo rm *.sh.*
     echo
 	if [[ $1 == '-updateonly' ]]
       then
