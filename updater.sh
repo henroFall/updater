@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set home directories here:
+# Set home directories here-
 scriptsHome=/scripts
 homeHome=$(cat $scriptsHome/home.txt)
 dockerHome=$homeHome/docker
