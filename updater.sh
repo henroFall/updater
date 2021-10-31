@@ -198,8 +198,7 @@ fi
 }
 
 updateNVR() {
-   echo here we go
-   # Need to fix SUDO / not SUDO here
+   echo Looking for NVR...
    if [ -d "$nvrHome" ]; then
      sudo mkdir -p /tmp/ipconfigureDownload
      cd /tmp/ipconfigureDownload
