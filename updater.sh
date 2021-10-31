@@ -152,7 +152,7 @@ updateUpdater() {
     sudo chmod +x updateandreboot.sh
     sudo chmod +x nordup.sh
     sudo chmod +x norddown.sh
-    sudo rm *.sh.*
+    sudo rm -f *.sh.*
     echo
 	if [[ $1 == '-updateonly' ]]
       then
