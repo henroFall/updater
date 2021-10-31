@@ -197,20 +197,19 @@ fi
 }
 
 updateNVR() {
-   # Need to fix SUDO / not SUDO here 
+   echo here we go
+   # Need to fix SUDO / not SUDO here
    if [ -d "$nvrHome" ]; then
-     mkdir -p /tmp/ipconfigureDownload
+     sudo mkdir -p /tmp/ipconfigureDownload
      cd /tmp/ipconfigureDownload
-     rm -f -v /tmp/ipconfigureDownload/*
-     wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
-     mv ./* ./ipconfigure-latest.deb
-     check_exit_status
-     dpkg -i ipconfigure-latest.deb
-     check_exit_status
-     apt --fix-broken install
-     check_exit_status
+     sudo rm -f -v /tmp/ipconfigureDownload/*
+     sudo wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
+     sudo mv ./* ./ipconfigure-latest.deb
+     #sudo dpkg -i ipconfigure-latest.deb
+     sudo apt --fix-broken install
    fi
 }
+
 
 rebootCheck() {
 
