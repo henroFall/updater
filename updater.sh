@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set home directories here-
+# Set home directories here:
 scriptsHome=/scripts
 homeHome=$(cat $scriptsHome/home.txt)
 dockerHome=$homeHome/docker
@@ -198,8 +198,7 @@ fi
 }
 
 updateNVR() {
-   echo here we go
-   # Need to fix SUDO / not SUDO here
+   echo Looking for NVR...
    if [ -d "$nvrHome" ]; then
      sudo mkdir -p /tmp/ipconfigureDownload
      cd /tmp/ipconfigureDownload
