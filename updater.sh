@@ -144,10 +144,19 @@ updateDocker() {
 updateUpdater() {
 
     cd "$scriptsHome"
-    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
-    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
-    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
-    sudo wget -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
+	rm *.sh.1
+	rm *.sh.2
+	rm *.sh.3
+	rm *.sh.4
+	rm *.sh.5
+	rm *.sh.6
+	rm *.sh.7
+	rm *.sh.8
+	rm *.sh.9
+    sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updater.sh
+    sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/updateandreboot.sh
+    sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/nordup.sh
+    sudo wget -N -q --show-progress https://raw.githubusercontent.com/henroFall/updater/master/norddown.sh
     sudo chmod +x updater.sh
     sudo chmod +x updateandreboot.sh
     sudo chmod +x nordup.sh
@@ -224,11 +233,11 @@ leave() {
 
     echo -e "\e[93mUpdate Complete\e[0m"
     if [ -z "$1" ]; then
-        touch $homeHome/updater.log
+        #touch $homeHome/updater.log
         echo "Updater last run:" > $homeHome/updater.log
         date >> $homeHome/updater.log
         else
-          touch $homeHome/updater.log
+          #touch $homeHome/updater.log
           echo "Updater last run:" > $dockerHome/updater.log
           date >> $dockerHome/updater.log
     fi
