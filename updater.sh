@@ -212,12 +212,10 @@ updateNVR() {
 
 
 rebootCheck() {
-
-    #if [ -f /var/run/reboot-required ]; then
-    #  cat /var/run/reboot-required
-    #else echo -e '\e[93mNo reboot is required.\e[0m'
-    #fi
+	if [[ $1 != '-auto' ]]
+      then
     needrestart -r i
+	fi
 }
 
 leave() {
