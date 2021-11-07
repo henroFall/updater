@@ -136,10 +136,10 @@ updateDocker() {
           cd $homeHome/docker
           check_exit_status $1
       done
-	  if [ -d "$teslamateHome" ]; then
+      if [ -d "$teslamateHome" ]; then
       echo -e "\e[93mRestarting Kiosks in 5 minutes...-\e[0m"
-	    sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
-      sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
+        sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
+        sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
       echo -e "\e[93mBacking up TeslaMate...-\e[0m"
       docker-compose exec -T database pg_dump -U teslamate teslamate > /mnt/MediaG/BACKUP/teslamate/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
     fi
@@ -161,13 +161,13 @@ updateUpdater() {
     sudo chmod +x norddown.sh
     sudo rm -f *.sh.*
     echo
-	if [[ $1 == '-updateonly' ]]
+    if [[ $1 == '-updateonly' ]]
       then
-	  echo Option updateonly enabled.
-	  exit
-	fi
-	echo Retrieved latest version of updater script, will be executed on next run.
-	echo
+      echo Option updateonly enabled.
+      exit
+    fi
+    echo Retrieved latest version of updater script, will be executed on next run.
+    echo
 }
 
 pruneDocker() {
@@ -219,10 +219,10 @@ updateNVR() {
 
 
 rebootCheck() {
-	if [[ $1 != '-auto' ]]
+    if [[ $1 != '-auto' ]]
       then
     needrestart -r i
-	fi
+    fi
 }
 
 leave() {
