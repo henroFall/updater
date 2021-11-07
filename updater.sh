@@ -4,7 +4,9 @@
 scriptsHome=/scripts
 homeHome=$(cat $scriptsHome/home.txt)
 dockerHome=$homeHome/docker
+teslamateHome=$dockerHome/teslamate
 kiosk1=192.168.200.177
+kiosk2=192.168.200.178
 
 nvrHome=/opt/orchid
 
@@ -134,12 +136,16 @@ updateDocker() {
           cd $homeHome/docker
           check_exit_status $1
       done
-	  echo -e "\e[93mRestarting Kiosks in 5 minutes...-\e[0m"
-	  #sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
-    sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
-    else
-      echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
+	  if [ -d "$teslamateHome" ]; then
+      echo -e "\e[93mRestarting Kiosks in 5 minutes...-\e[0m"
+	    sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
+      sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
+      echo -e "\e[93mBacking up TeslaMate...-\e[0m"
+      docker-compose exec -T database pg_dump -U teslamate teslamate > /mnt/MediaG/BACKUP/teslamate/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
     fi
+      else
+        echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
+      fi
 }
 
 updateUpdater() {
