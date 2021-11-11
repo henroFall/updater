@@ -119,7 +119,8 @@ updateDocker() {
     if [ -d "$dockerHome" ]; then
       echo -e "\e[93mBacking up TeslaMate...-\e[0m"
       cd ~/docker/teslamate
-      docker-compose exec -T database pg_dump -U teslamate teslamate > /mnt/MediaG/BACKUP/teslamate/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
+      docker-compose exec -T database pg_dump -U teslamate teslamate > ~/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
+      sudo mv $homehome/teslamate-*.bak /mnt/MediaG/BACKUP
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       cd $dockerHome
