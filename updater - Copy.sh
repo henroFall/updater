@@ -117,9 +117,6 @@ updateOS() {
 updateDocker() {
 
     if [ -d "$dockerHome" ]; then
-      echo -e "\e[93mBacking up TeslaMate...-\e[0m"
-      cd ~/docker/teslamate
-      docker-compose exec -T database pg_dump -U teslamate teslamate > /mnt/MediaG/BACKUP/teslamate/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       cd $dockerHome
@@ -143,7 +140,9 @@ updateDocker() {
       echo -e "\e[93mRestarting Kiosks in 5 minutes...-\e[0m"
         sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
         sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
-      fi
+      echo -e "\e[93mBacking up TeslaMate...-\e[0m"
+      docker-compose exec -T database pg_dump -U teslamate teslamate > /mnt/MediaG/BACKUP/teslamate/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
+    fi
       else
         echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
       fi
