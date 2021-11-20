@@ -48,7 +48,7 @@ check_exit_status() {
       echo
       echo -e "\e[93mERROR Process Failed!\e[0m"
       echo
-      if [[ $1 == '-auto' ]]
+      if [[ $1 == '--auto' ]]
       then
         echo -e "\e[41m AUTO MODE IS ENABLED, EXITING.. \e[0m"
         echo
@@ -69,6 +69,12 @@ greeting() {
     echo -e "\e[93mHello, $USER. Updating all containers I know about and the OS."
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
     echo
+	    if [[ $1 == '--help' ]]
+      then
+      echo "--updateonly: Just download the fresh scripts, do not run."
+	  echo "--auto: Run with no prompts to continue on error; auto-halt."
+      exit
+    fi
 }
 
 killVPN() {
@@ -120,7 +126,7 @@ updateDocker() {
       echo -e "\e[93mBacking up TeslaMate...-\e[0m"
       cd ~/docker/teslamate
       docker-compose exec -T database pg_dump -U teslamate teslamate > ~/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
-      sudo mv $homehome/teslamate-*.bak /mnt/MediaG/BACKUP
+      sudo mv $homehome/teslamate-*.bck /mnt/MediaG/BACKUP
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       cd $dockerHome
@@ -143,7 +149,7 @@ updateDocker() {
       if [ -d "$teslamateHome" ]; then
       echo -e "\e[93mRestarting Kiosks in 5 minutes...-\e[0m"
         sshpass -p Abc123! ssh pi@kiosk1 'pkill -fe chromium-browser && sudo shutdown -r +5'
-        sshpass -p Abc123! ssh pi@kiosk2 'pkill -fe chromium-browser && sudo shutdown -r +5'
+        sshpass -p Abc123! ssh pi@192.168.200.178 'pkill -fe chromium-browser && sudo shutdown -r +5'
       fi
       else
         echo -e "\e[93mThere are no docker files at $dockerHome to update. \e[0m"
@@ -163,7 +169,7 @@ updateUpdater() {
     sudo chmod +x norddown.sh
     sudo rm -f *.sh.*
     echo
-    if [[ $1 == '-updateonly' ]]
+    if [[ $1 == '--updateonly' ]]
       then
       echo Option updateonly enabled.
       exit
@@ -221,7 +227,7 @@ updateNVR() {
 
 
 rebootCheck() {
-    if [[ $1 != '-auto' ]]
+    if [[ $1 != '--auto' ]]
       then
     needrestart -r i
     fi
