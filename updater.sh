@@ -226,8 +226,9 @@ updateNVR() {
 }
 
 cleanNVR() {
-  echo Cleaning NVR RecentClips of $1 days...
+  echo Cleaning NVR RecentClips and Raw of $1 days...
   sudo find /home/pi/Footage/RecentClips/* -type d -ctime +$1 -exec rm -rf {} \;
+  sudo find /home/pi/Footage/SentryClips/Raw/* -type d -ctime +$1 -exec rm -rf {} \;
 }
 
 rebootCheck() {
