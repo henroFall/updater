@@ -226,7 +226,7 @@ updateNVR() {
 }
 
 cleanNVR() {
-  echo Cleaning NVR RecentClips...
+  echo Cleaning NVR RecentClips of $1 days...
   sudo find /home/pi/Footage/RecentClips/* -type d -ctime +$1 -exec rm -rf {} \;
 }
 
