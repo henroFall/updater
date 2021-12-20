@@ -225,6 +225,10 @@ updateNVR() {
    fi
 }
 
+cleanNVR() {
+  echo Cleaning NVR RecentClips...
+  sudo find /home/pi/Footage/RecentClips/* -type d -ctime +$1 -exec rm -rf {} \;
+}
 
 rebootCheck() {
     if [[ $1 != '--auto' ]]
@@ -261,6 +265,7 @@ showDocker $@
 # startVPN $@
 rebootCheck $@
 updateNVR $@
+cleanNVR 45
 leave $@
 
 # isNVRHere $@
