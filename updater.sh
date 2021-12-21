@@ -212,9 +212,16 @@ if [ -d "$nvrHome" ]; then
 fi
 }
 
+cleanNVR() {
+  echo Cleaning NVR RecentClips and Raw of $1 days...
+  sudo find /home/pi/Footage/RecentClips/* -type d -ctime +$1 -exec rm -rf {} \;
+  sudo find /home/pi/Footage/SentryClips/Raw/* -type d -ctime +$1 -exec rm -rf {} \;
+}
+
 updateNVR() {
    echo Looking for NVR...
    if [ -d "$nvrHome" ]; then
+     cleanNVR 45
      sudo mkdir -p /tmp/ipconfigureDownload
      cd /tmp/ipconfigureDownload
      sudo rm -f -v /tmp/ipconfigureDownload/*
@@ -223,12 +230,6 @@ updateNVR() {
      #sudo dpkg -i ipconfigure-latest.deb
      sudo apt --fix-broken install
    fi
-}
-
-cleanNVR() {
-  echo Cleaning NVR RecentClips and Raw of $1 days...
-  sudo find /home/pi/Footage/RecentClips/* -type d -ctime +$1 -exec rm -rf {} \;
-  sudo find /home/pi/Footage/SentryClips/Raw/* -type d -ctime +$1 -exec rm -rf {} \;
 }
 
 rebootCheck() {
@@ -266,7 +267,6 @@ showDocker $@
 # startVPN $@
 rebootCheck $@
 updateNVR $@
-cleanNVR 45
 leave $@
 
 # isNVRHere $@
