@@ -123,16 +123,20 @@ updateOS() {
 updateDocker() {
 
     if [ -d "$dockerHome" ]; then
-      echo -e "\e[93mBacking up TeslaMate...-\e[0m"
+      echo -e "\e[93mBacking up TeslaMate, Sonarr, & Radarr...-\e[0m"
       cd $teslamateHome
 	  check_exit_status $1
       docker-compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
 	  check_exit_status $1
-      sudo mv $homeHome/teslamate-*.bck /mnt/MediaG/BACKUP
+      sudo mv $homeHome/teslamate-*.bck /mnt/MediaG/BACKUP/teslamate
+      cd $dockerHome
+	  check_exit_status $1
+	  sudo find . -name *backup*.zip -exec zip arrBackups.zip {} +
+	  check_exit_status $1
+      sudo mv $dockerHome/arrBackups.zip /mnt/MediaG/BACKUP/arrBackups
 	  check_exit_status $1
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
-      cd $dockerHome
       check_exit_status $1
       shopt -s nullglob
       for dname in *; do
