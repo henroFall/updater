@@ -4,7 +4,9 @@
 scriptsHome=/scripts
 homeHome=$(cat $scriptsHome/home.txt)
 dockerHome=$homeHome/docker
-teslamateHome=$dockerHome/teslamate
+teslamateHome=$dockerHome/teslamate22
+
+backupHome=/mnt/MediaG/BACKUP/teslamate
 kiosk1=192.168.200.177
 kiosk2=192.168.200.178
 
@@ -69,10 +71,10 @@ greeting() {
     echo -e "\e[93mHello, $USER. Updating all containers I know about and the OS."
     echo -e "\e[93m--------------------------------------------------------------\e[0m"
     echo
-	    if [[ $1 == '--help' ]]
+        if [[ $1 == '--help' ]]
       then
       echo "--updateonly: Just download the fresh scripts, do not run."
-	  echo "--auto: Run with no prompts to continue on error; auto-halt."
+      echo "--auto: Run with no prompts to continue on error; auto-halt."
       exit
     fi
 }
@@ -125,17 +127,17 @@ updateDocker() {
     if [ -d "$dockerHome" ]; then
       echo -e "\e[93mBacking up TeslaMate, Sonarr, & Radarr...-\e[0m"
       cd $teslamateHome
-	    check_exit_status $1
+        check_exit_status $1
       docker-compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
-	    check_exit_status $1
-      sudo mv $homeHome/teslamate-*.bck /mnt/MediaG/BACKUP/teslamate
+        check_exit_status $1
+      sudo mv $homeHome/teslamate-*.bck $backupHome
       check_exit_status $1
       cd $dockerHome
-	    check_exit_status $1
-	    sudo find . -name *backup*.zip -exec zip arrBackups.zip {} +
-	    check_exit_status $1
+        check_exit_status $1
+        sudo find . -name *backup*.zip -exec zip arrBackups.zip {} +
+        check_exit_status $1
       sudo mv $dockerHome/arrBackups.zip /mnt/MediaG/BACKUP/arrBackups
-	    check_exit_status $1
+        check_exit_status $1
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       check_exit_status $1
