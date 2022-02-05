@@ -139,8 +139,10 @@ updateDocker() {
         echo -e "\e[93mBacking up Sonarr, & Radarr if they exist...-\e[0m"
         sudo find . -name *backup*.zip -exec zip arrBackups.zip {} +
         check_exit_status $1
+      if [ -f "$dockerHome/arrBackups.zip" ]; then
       sudo mv $dockerHome/arrBackups.zip /mnt/MediaG/BACKUP/arrBackups
         check_exit_status $1
+      fi
       echo -e "\e[93mChecking/Pulling Fresh Docker Containers...-\e[0m"
       composeFile=docker-compose.yml
       check_exit_status $1
