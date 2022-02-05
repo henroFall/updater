@@ -12,7 +12,6 @@ kiosk2=192.168.200.178
 
 nvrHome=/opt/orchid
 
-
 function whereami {
         echo "Searching for location."
         if [[ -d "/opt/amt/IoTGateway" ]]
