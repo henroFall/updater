@@ -234,8 +234,9 @@ cleanNVR() {
 }
 
 updateNVR() {
-   echo Looking for NVR...
+   echo "Looking for NVR..."
    if [ -d "$nvrHome" ]; then
+   echo "NVR Found."
      cleanNVR 45
      sudo mkdir -p /tmp/ipconfigureDownload
      cd /tmp/ipconfigureDownload
@@ -244,6 +245,8 @@ updateNVR() {
      sudo mv ./* ./ipconfigure-latest.deb
      #sudo dpkg -i ipconfigure-latest.deb
      sudo apt --fix-broken install
+    else
+     echo "NVR not found."
    fi
 }
 
