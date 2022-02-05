@@ -123,17 +123,20 @@ updateOS() {
 }
 
 updateDocker() {
-
+# THIS DEPENDS ON TESLAMATE TO BE TOGETHER ON THE JACKDARIPPA SERVER
     if [ -d "$dockerHome" ]; then
-      echo -e "\e[93mBacking up TeslaMate, Sonarr, & Radarr...-\e[0m"
+      if [ -d "$teslamateHome" ]; then
+      echo -e "\e[93mBacking up TeslaMate...-\e[0m"
       cd $teslamateHome
         check_exit_status $1
       docker-compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
         check_exit_status $1
       sudo mv $homeHome/teslamate-*.bck $backupHome
       check_exit_status $1
+      fi
       cd $dockerHome
         check_exit_status $1
+        echo -e "\e[93mBacking up Sonarr, & Radarr if they exist...-\e[0m"
         sudo find . -name *backup*.zip -exec zip arrBackups.zip {} +
         check_exit_status $1
       sudo mv $dockerHome/arrBackups.zip /mnt/MediaG/BACKUP/arrBackups
@@ -144,6 +147,7 @@ updateDocker() {
       shopt -s nullglob
       for dname in *; do
           cd $dname
+          check_exit_status $1
         if test -f "$composeFile"; then
           echo -e "\e[93mOperating on $dname -\e[0m"
           sudo docker-compose pull
