@@ -130,7 +130,8 @@ updateDocker() {
         check_exit_status $1
       docker-compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
         check_exit_status $1
-      sudo mv $homeHome/teslamate-*.bck $backupHome
+      sudo cp --no-preserve $homeHome/teslamate-*.bck $backupHome
+      sudo rm $homeHome/teslamate-*.bck
       check_exit_status $1
       fi
       cd $dockerHome
@@ -239,12 +240,23 @@ updateNVR() {
    echo "NVR Found."
      cleanNVR 45
      sudo mkdir -p /tmp/ipconfigureDownload
+     sudo mkdir -p /tmp/ipconfigureDownload/last
      cd /tmp/ipconfigureDownload
-     sudo rm -f -v /tmp/ipconfigureDownload/*
+     #sudo rm -f -v /tmp/ipconfigureDownload/*
      sudo wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
-     sudo mv ./* ./ipconfigure-latest.deb
-     #sudo dpkg -i ipconfigure-latest.deb
-     sudo apt --fix-broken install
+     for file in /tmp/ipconfigureDownload/last/*; do
+       name=${file##*/}
+       if [[ -f /tmp/ipconfigureDownload/$name ]]; then
+           echo "Fresh NVR installer found. Updating..."
+           sudo rm /tmp/ipconfigureDownload/last/*
+           sudo mv /tmp/ipconfigureDownload/*.deb /tmp/ipconfigureDownload/last/
+           cd /tmp/ipconfigureDownload/last
+           sudo dpkg -i ipconfigure-latest.deb
+           sudo apt --fix-broken install
+        else
+        echo "NVR on latest version."
+       fi
+     done
     else
      echo "NVR not found."
    fi
