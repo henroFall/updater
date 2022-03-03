@@ -246,7 +246,7 @@ updateNVR() {
      sudo wget -nv -r -nd -l1 -np -R "index.html*" http://192.168.200.200:8080/ipconfigure/
      for file in /tmp/ipconfigureDownload/last/*; do
        name=${file##*/}
-       if [[ -f /tmp/ipconfigureDownload/$name ]]; then
+       if ! [[ -f /tmp/ipconfigureDownload/$name ]]; then
            echo "Fresh NVR installer found. Updating..."
            sudo rm /tmp/ipconfigureDownload/last/*
            sudo mv /tmp/ipconfigureDownload/*.deb /tmp/ipconfigureDownload/last/
