@@ -265,7 +265,7 @@ updateNVR() {
 rebootCheck() {
     if [[ $1 != '--auto' ]]
       then
-    needrestart -r i
+    sudo needrestart -r i
     fi
 }
 
