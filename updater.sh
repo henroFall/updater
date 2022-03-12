@@ -190,7 +190,7 @@ updateUpdater() {
       echo Option updateonly enabled.
       exit
     fi
-    echo Retrieved latest version of updater script, will be executed on next run.
+    echo -e "Retrieved latest version of updater script, will be executed on next run."
     echo
 }
 
@@ -298,6 +298,4 @@ showDocker $@
 rebootCheck $@
 updateNVR $@
 leave $@
-
 # isNVRHere $@
-
