@@ -128,7 +128,7 @@ updateDocker() {
       echo -e "\e[93mBacking up TeslaMate...-\e[0m"
       cd $teslamateHome
         check_exit_status $1
-      docker-compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
+      docker compose exec -T database pg_dump -U teslamate teslamate > $homeHome/teslamate-$(date "+%Y-%m-%d-%H-%M-%S").bck
         check_exit_status $1
       sudo cp --no-preserve $homeHome/teslamate-*.bck $backupHome
       sudo rm $homeHome/teslamate-*.bck
@@ -152,9 +152,9 @@ updateDocker() {
           check_exit_status $1
         if test -f "$composeFile"; then
           echo -e "\e[93mOperating on $dname -\e[0m"
-          sudo docker-compose pull
+          sudo docker compose pull
           check_exit_status $1
-          sudo docker-compose up -d --force-recreate --remove-orphans
+          sudo docker compose up -d --force-recreate --remove-orphans
           check_exit_status $1
           docker image prune -f
           check_exit_status $1
