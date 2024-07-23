@@ -115,7 +115,7 @@ updateOS() {
     echo -e "\e[93mQuietly updating package information...\e[0m"
     sudo apt update -qq;
     check_exit_status $1
-    sudo apt -y upgrade;
+    sudo apt -y full-upgrade;
     check_exit_status $1
     sudo apt -y autoremove;
     check_exit_status $1
